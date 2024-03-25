@@ -21,8 +21,8 @@ class ProjectSeeder extends Seeder
             $newProject->title = $faker->sentence(3);
             $newProject->cover_image = $faker->imageUrl();
             $newProject->repo_name = Project::generateRepoName($newProject->title);
-            $newProject->repo_link = $faker->
-            $newProject->description = $faker->
+            $newProject->repo_link = $faker->url();
+            $newProject->description = $faker->text(500);
 
             $newProject->save();
         }
