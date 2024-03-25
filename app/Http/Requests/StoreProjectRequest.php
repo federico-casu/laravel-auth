@@ -22,7 +22,11 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'unique:projects,title'],
+            'cover_image' => ['nullable'],
+            'repo_name',
+            'repo_link' => ['nullable'],
+            'description' => ['nullable']
         ];
     }
 }

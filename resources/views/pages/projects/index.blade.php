@@ -4,6 +4,8 @@
     <div class="container">
         <h1>My projects</h1>
 
+        <a class="btn btn-primary my-3" href="{{ route('dashboard.projects.create') }}">Create new project</a>
+
         <div
             class="table-responsive"
         >
@@ -17,6 +19,7 @@
                         <th scope="col">Repo Name</th>
                         <th scope="col">Repo Link</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +30,9 @@
                             <td>{{ $project->repo_name }}</td>
                             <td>{{ $project->repo_link }}</td>
                             <td>{{ $project->description }}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ route('dashboard.projects.edit', $project->id) }}">Edit</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

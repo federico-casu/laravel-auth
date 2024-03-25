@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Auth\Events\Validated;
 
 class ProjectController extends Controller
 {
@@ -23,7 +24,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.projects.create');
     }
 
     /**
@@ -31,7 +32,15 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $validated_data = $request->validated();
+
+        $validated_data['repo_name'] = Project::generateRepoName($validated_data['title']);
+
+        $newProject = Project::create($validated_data);
+
+        // dd($newProject);
+
+        return redirect()->route('dashboard.projects.index');
     }
 
     /**
