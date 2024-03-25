@@ -38,8 +38,6 @@ class ProjectController extends Controller
 
         $newProject = Project::create($validated_data);
 
-        // dd($newProject);
-
         return redirect()->route('dashboard.projects.index');
     }
 
@@ -72,6 +70,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('dashboard.projects.index');
     }
 }
