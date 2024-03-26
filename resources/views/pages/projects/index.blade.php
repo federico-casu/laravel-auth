@@ -28,7 +28,7 @@
                             <td>{{ $project->id }}</td>
                             <td>{{ $project->title }}</td>
                             <td>{{ $project->repo_name }}</td>
-                            <td>{{ $project->repo_link }}</td>
+                            <td><a href="{{ route('dashboard.projects.show', $project->repo_name) }}">{{ $project->repo_link }}</a></td>
                             <td>{{ $project->description }}</td>
                             <td>
                                 <a class="btn btn-primary w-100 mb-3" href="{{ route('dashboard.projects.edit', $project->repo_name) }}">Edit</a>
