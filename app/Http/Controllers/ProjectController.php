@@ -64,9 +64,8 @@ class ProjectController extends Controller
     {
         $validated_data = $request->validated();
 
-        $validated_data['repo_name'] = Project::generateRepoName($validated_data['title']);
+        $validated_data['repo_name'] = Project::generateRepoName($request->title);
 
-        // $project->update($request->all());
         $project->update($validated_data);
 
         return redirect()->route('dashboard.projects.index');
