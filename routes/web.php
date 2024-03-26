@@ -33,9 +33,14 @@ Route::middleware('auth')->group(function () {
 
 #prefix rappresenta il nome del gruppo di views che saranno del tipo localhost/dashboard/
 #name rappresenta il nome del gruppo di rotte che saranno del tipo dashboard.projects.index ecc..
-Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {
+Route::middleware('auth')
+    ->prefix('dashboard')
+    ->name('dashboard.')
+    ->group(function () {
 
-    Route::resource('projects', ProjectController::class);
+    Route::resource('projects', ProjectController::class)->parameters([
+        'projects' => 'project:repo_name'
+    ]);
 
 });
 

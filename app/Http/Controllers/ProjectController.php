@@ -54,7 +54,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('pages.projects.edit', compact('project'));
     }
 
     /**
@@ -62,7 +62,14 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $validated_data = $request->validated();
+
+        $validated_data['repo_name'] = Project::generateRepoName($validated_data['title']);
+
+        // $project->update($request->all());
+        $project->update($validated_data);
+
+        return redirect()->route('dashboard.projects.index');
     }
 
     /**

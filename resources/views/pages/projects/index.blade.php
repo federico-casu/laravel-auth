@@ -31,9 +31,9 @@
                             <td>{{ $project->repo_link }}</td>
                             <td>{{ $project->description }}</td>
                             <td>
-                                <a class="btn btn-primary w-100 mb-3" href="{{ route('dashboard.projects.edit', $project->id) }}">Edit</a>
+                                <a class="btn btn-primary w-100 mb-3" href="{{ route('dashboard.projects.edit', $project->repo_name) }}">Edit</a>
 
-                                <form action="{{ route('dashboard.projects.destroy', $project->id) }}" method="POST">
+                                <form action="{{ route('dashboard.projects.destroy', $project->repo_name) }}" method="POST">
 
                                     @csrf
                                     @method('DELETE')
