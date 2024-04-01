@@ -23,7 +23,7 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'title' => ['required', 'unique:projects,title'],
-            'cover_image' => ['nullable'],
+            'cover_image' => ['nullable', 'image'],
             'repo_name' => ['unique:projects,repo_name'],
             'repo_link' => ['nullable'],
             'description' => ['nullable']

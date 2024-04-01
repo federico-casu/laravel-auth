@@ -5,11 +5,11 @@
         <h1>{{ $project->title }}</h1>
         <h4 class="">{{ $project->repo_name }}</h4>
         <hr>
-        <div class="d-flex gap-5">
+        <div class="d-flex gap-3">
             <figure>
-                <img src="{{ $project->cover_image }}" alt="{{ $project->repo_name }}">
+                <img src="{{ asset('/storage/' . $project->cover_image) }}" alt="{{ $project->repo_name }}">
             </figure>
-            <div>
+            <div class="border-start ps-3">
                 <h6>Description:</h6>
                 <p>{{ $project->description }}</p>
             </div>

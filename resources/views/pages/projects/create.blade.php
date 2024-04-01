@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form action="{{ route('dashboard.projects.store') }}" method="POST">
+        <form action="{{ route('dashboard.projects.store') }}" method="POST" enctype="multipart/form-data">
 
             @csrf
 
@@ -30,8 +30,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="cover_image" class="form-label">Cover image</label>
-                <input type="text" class="form-control" name="cover_image" id="cover_image" />
+                <label for="cover_image" class="form-label @error('cover_image') is-invalid @enderror">Cover image</label>
+                <input type="file" class="form-control" name="cover_image" id="cover_image" />
             </div>
 
             <div class="mb-3">

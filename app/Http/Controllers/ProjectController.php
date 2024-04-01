@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -36,7 +37,21 @@ class ProjectController extends Controller
 
         $validated_data['repo_name'] = Project::generateRepoName($validated_data['title']);
 
-        $newProject = Project::create($validated_data);
+        // dd($request);
+
+
+        if ($request->hasFile('cover_image')) {
+            
+            $path = Storage::disk('public')->put('project_covers', $request->cover_image);
+
+            $validated_data['cover_image'] = $path;
+
+            // dd($validated_data, $path);
+
+        }
+
+
+            $newProject = Project::create($validated_data);
 
         return redirect()->route('dashboard.projects.index');
     }
@@ -65,6 +80,18 @@ class ProjectController extends Controller
         $validated_data = $request->validated();
 
         $validated_data['repo_name'] = Project::generateRepoName($request->title);
+
+
+        if ( $request->hasFile('cover_image') ) {
+            if ( $project->cover_image ) {
+                Storage::delete($project->cover_image);
+            }
+
+            $path = Storage::disk('public')->put('project_covers', $request->cover_image);
+
+            $validated_data['cover_image'] = $path;
+        }
+
 
         $project->update($validated_data);
 

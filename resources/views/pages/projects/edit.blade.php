@@ -14,14 +14,14 @@
             </div>
         @endif
 
-        <form action="{{ route('dashboard.projects.update', $project) }}" method="POST">
+        <form action="{{ route('dashboard.projects.update', $project) }}" method="POST" enctype="multipart/form-data">
 
             @csrf
             @method('PUT')
 
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control @error ('title') is-invalid @enderror" name="title" id="title"
+                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title"
                     value="{{ old('title') ?? $project->title }}" />
 
                 @error('title')
@@ -32,15 +32,20 @@
             </div>
 
             <div class="mb-3">
+
                 <label for="cover_image" class="form-label">Cover image</label>
-                <input type="text" class="form-control" name="cover_image" id="cover_image"
+                @if ($project->cover_image)
+                    <img class="d-block mb-3" src="{{ asset('/storage/' . $project->cover_image) }}"
+                        alt="{{ $project->title }}">
+                @endif
+
+                <input type="file" class="form-control" name="cover_image" id="cover_image"
                     value="{{ old('cover_image') ?? $project->cover_image }}" />
             </div>
 
             <div class="mb-3">
                 <label for="repo_link" class="form-label">Repository link</label>
-                <input type="text" class="form-control" name="repo_link" id="repo_link"
-                    value="{{ old('repo_link') ?? $project->repo_link }}" />
+                <input type="text" class="form-control" name="repo_link" id="repo_link" value="{{ old('repo_link') ?? $project->repo_link }}" />
             </div>
 
 
